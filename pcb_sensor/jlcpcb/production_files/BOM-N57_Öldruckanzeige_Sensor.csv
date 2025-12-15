@@ -1,0 +1,6 @@
+Comment,Designator,Footprint,LCSC,Quantity
+Conn_01x02_Pin,J3,KFZ-2-POL-P5_DJ7021B-3.5-1121,,1
+1μF,C2,C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,,1
+DS18B20,J2,PinHeader_1x03_P2.00mm_Vertical,,1
+100nF,C1,C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,,1
+PressSensor,J1,JST_PH_S4B-PH-K_1x04_P2.00mm_Horizontal,,1

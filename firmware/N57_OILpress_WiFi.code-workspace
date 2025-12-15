@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "N57 Oilpressure over Wifi",
+			"path": "."
+		},
+		{
+			"path": "\\\\10.10.20.6\\fastnas_andre\\elektronik\\KiCad_working_dir\\1Projekte\\N57_Oeldruckanzeige - ESP32_mini"
+		},
+		{
+			"path": "\\\\10.10.20.6\\fastnas_andre\\elektronik\\KiCad_working_dir\\1Projekte\\N57_Öldruckanzeige_Sensor"
+		}
+	],
+	"settings": {
+		"mplab.clangd.arguments": [
+			"--compile-commands-dir=${workspaceFolder}\\_build\\My_Project\\default"
+		],
+		"stm32cube-ide-clangd.path": "cube"
+	}
+}

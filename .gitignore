@@ -1,0 +1,12 @@
+# Private 
+docs/Mouser.pdf
+docs/JLCPCB_invoice.pdf
+docs/AME-Logo.cdr
+
+# KiCad Cache & Backups
+**/*-backups/
+**/fp-info-cache/
+
+# KiCad Lockfiles
+*.kicad_sch.lock
+*.kicad_pcb.lock

@@ -1,0 +1,6 @@
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
+C1,100nF,C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,99.746,-94.666,180.0,top
+C2,1μF,C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,99.746,-96.19,180.0,top
+J1,PressSensor,JST_PH_S4B-PH-K_1x04_P2.00mm_Horizontal,95.984,-91.872,180.0,top
+J2,DS18B20,PinHeader_1x03_P2.00mm_Vertical,105.08,-90.348,-90.0,top
+J3,Conn_01x02_Pin,KFZ-2-POL-P5_DJ7021B-3.5-1121,98.984,-110.668,45.0,top

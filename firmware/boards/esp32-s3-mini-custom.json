@@ -1,0 +1,43 @@
+{
+    "name": "ESP32-S3-MINI-2U-N4R2 Custom",
+    "url": "https://www.espressif.com/en/products/modules/esp32-s3-mini",
+    "vendor": "Espressif",
+
+    "build": {
+        "core": "esp32",
+        "mcu": "esp32s3",
+        "variant": "esp32s3",
+        "extra_flags": [
+            "-DARDUINO_ESP32S3_DEV",
+            "-DBOARD_HAS_PSRAM",
+            "-mfix-esp32-psram-cache-issue"
+        ],
+        "arduino": {
+            "ldscript": "esp32s3_out.ld"
+        },
+        "f_cpu": "240000000L",
+        "f_flash": "80000000L",
+        "flash_mode": "qio",
+        "flash_size": "4MB"
+    },
+
+    "connectivity": [
+        "wifi"
+    ],
+
+    "debug": {
+        "openocd_target": "esp32s3.cfg"
+    },
+
+    "frameworks": [
+        "arduino"
+    ],
+
+    "upload": {
+        "flash_size": "4MB",
+        "maximum_size": 4194304,
+        "maximum_ram_size": 327680,
+        "speed": 921600,
+        "require_upload_port": true
+    }
+}
