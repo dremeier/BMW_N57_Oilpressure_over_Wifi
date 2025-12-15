@@ -4,6 +4,18 @@
 mit eigenem PCB, VDO-Öldrucksensor und Web-UI (Dark-OLED / Kombiinstrument-Stil).
 
 ---
+## 📸 Projektüberblick
+
+### Komplettsystem – Steuergerät & Sensor
+![Systemübersicht](docs/IMG_7755.JPG)
+
+Das System besteht aus einem ESP32-Steuergerät und einer separaten
+Sensorplatine, die direkt am VDO-Öldruckgeber montiert ist.  
+Die Anzeige erfolgt drahtlos über ein integriertes Web-Interface.
+
+---
+### Steuergerät (ESP32-S3 Mini)
+![ESP32 Steuergerät](docs/IMG_7751.JPG)
 
 ## Features
 
@@ -19,6 +31,14 @@ mit eigenem PCB, VDO-Öldrucksensor und Web-UI (Dark-OLED / Kombiinstrument-Stil
 
 ---
 
+### VDO Öldruckgeber montiert
+![VDO Drucksensor](docs/IMG_7753.JPG)
+
+OEM-naher VDO-Öldruckgeber mit integrierter Elektronik und KFZ-tauglicher
+Montage.
+
+---
+
 ## Projektstruktur
 
 ```text
@@ -31,14 +51,27 @@ BMW_N57_OILPRESSURE_OVER_WIFI/
 ```
 
 ---
+### 3D-Render – Hauptplatine
+![PCB 3D Render](docs/pcb_main_3D.png)
+
+3D-Ansicht der Hauptplatine (KiCad).  
+Kompaktes, robustes Layout für den Einsatz im Fahrzeug.
 
 ## Hardware
 
 - ESP32 (ESP32-S3 mini)
 - VDO Öldruckgeber 0–5 bar (M12x1.5)
 - DS18B20 Temperatursensor
-- Pullup-Widerstand am Sensor: **220 Ω**
+- Step‑Down‑Regler 
 - Versorgung Sensor: **≈ 5,0 V**
+- USB‑C zum flaschen
+
+## 🚦 Status-LEDs
+
+| LED | Funktion |
+|----|---------|
+| **LED orange** | Leuchtet dauerhaft, wenn der WiFi-Access-Point aktiv ist |
+| **LED blau** | Leuchtet, sobald ein Client (Smartphone / Browser) verbunden ist |
 
 ---
 
@@ -58,6 +91,8 @@ Die Firmware berechnet:
 4. IIR-Filter zur Glättung
 
 ---
+### Web-UI (Live-Anzeige)
+![Web UI](docs/Web-UI.PNG)
 
 ## Web-UI
 
