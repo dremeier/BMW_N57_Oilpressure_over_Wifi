@@ -169,6 +169,9 @@ const char MAIN_PAGE[] PROGMEM = R"====(
 <title>N57 Oilpressure</title>
 
 <style>
+/* =======================================================
+   Farb-Variablen (Default = TAG = GRÜN)
+   ======================================================= */
 :root{
     --main-color:#00ff66;
     --dim-color:rgba(0,255,102,0.55);
@@ -176,12 +179,14 @@ const char MAIN_PAGE[] PROGMEM = R"====(
     --warn-color:#ff2a2a;
 }
 
+/* ================= NACHT = BMW-AMBER ================= */
 body[data-theme="amber"]{
     --main-color:#ff7a18;
     --dim-color:rgba(255,122,24,0.55);
     --soft-color:rgba(255,122,24,0.35);
 }
 
+/* ================= Grundlayout ================= */
 body{
     background:#000;
     color:var(--main-color);
@@ -196,6 +201,7 @@ h1{
     color:var(--dim-color);
 }
 
+/* ================= Boxen ================= */
 .box{
     border:1px solid var(--soft-color);
     margin:14px;
@@ -203,6 +209,7 @@ h1{
     border-radius:14px;
 }
 
+/* ================= Hauptanzeige ================= */
 .flex{
     display:flex;
     justify-content:center;
@@ -222,6 +229,7 @@ h1{
     margin-top:-6px;
 }
 
+/* ================= Warnung ================= */
 span.warn{
     color:var(--warn-color);
     text-shadow:0 0 12px rgba(255,42,42,0.9);
@@ -236,10 +244,12 @@ span.warn.blink{
     25%,75%{opacity:0}
 }
 
+/* ================= Instrument ================= */
 svg path{ stroke:var(--soft-color); }
 svg line{ stroke:var(--main-color); }
 svg circle{ fill:var(--main-color); }
 
+/* ================= Debug ================= */
 .box.debug{
     color:var(--dim-color);
     font-size:22px;
@@ -257,14 +267,17 @@ svg circle{ fill:var(--main-color); }
 </style>
 
 <script>
+/* ================= TAG / NACHT ================= */
 function updateThemeByTime(){
     const h = new Date().getHours();
     document.body.setAttribute("data-theme",(h>=20||h<6)?"amber":"green");
 }
 
+/* ================= Schwellen ================= */
 const OIL_WARN_BAR = 0.8;
 const TEMP_WARN_C = 120;
 
+/* ================= Zeiger ================= */
 function setNeedle(bar){
     if(bar===null) return;
     let a = -90 + (bar/5)*180;
@@ -272,6 +285,7 @@ function setNeedle(bar){
         .setAttribute("transform","rotate("+a+" 150 140)");
 }
 
+/* ================= Update ================= */
 async function update(){
     let j = await (await fetch("/data.json")).json();
 
