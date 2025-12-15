@@ -9,7 +9,7 @@
 // =========================================================
 // VERSIONEN
 // =========================================================
-#define SW_VERSION  "1.0"
+#define SW_VERSION  "1.1"
 #define HW_VERSION  "0.1"
 
 // =========================================================
@@ -169,9 +169,6 @@ const char MAIN_PAGE[] PROGMEM = R"====(
 <title>N57 Oilpressure</title>
 
 <style>
-/* =======================================================
-   Farb-Variablen (Default = TAG = GRÜN)
-   ======================================================= */
 :root{
     --main-color:#00ff66;
     --dim-color:rgba(0,255,102,0.55);
@@ -179,14 +176,12 @@ const char MAIN_PAGE[] PROGMEM = R"====(
     --warn-color:#ff2a2a;
 }
 
-/* ================= NACHT = BMW-AMBER ================= */
 body[data-theme="amber"]{
     --main-color:#ff7a18;
     --dim-color:rgba(255,122,24,0.55);
     --soft-color:rgba(255,122,24,0.35);
 }
 
-/* ================= Grundlayout ================= */
 body{
     background:#000;
     color:var(--main-color);
@@ -201,7 +196,6 @@ h1{
     color:var(--dim-color);
 }
 
-/* ================= Boxen ================= */
 .box{
     border:1px solid var(--soft-color);
     margin:14px;
@@ -209,7 +203,6 @@ h1{
     border-radius:14px;
 }
 
-/* ================= Hauptanzeige ================= */
 .flex{
     display:flex;
     justify-content:center;
@@ -220,7 +213,6 @@ h1{
 .value{
     font-size:64px;
     font-weight:bold;
-    color:var(--main-color);
     text-shadow:0 0 10px var(--dim-color);
 }
 
@@ -230,7 +222,6 @@ h1{
     margin-top:-6px;
 }
 
-/* ================= Warnung ================= */
 span.warn{
     color:var(--warn-color);
     text-shadow:0 0 12px rgba(255,42,42,0.9);
@@ -245,31 +236,20 @@ span.warn.blink{
     25%,75%{opacity:0}
 }
 
-/* ================= Instrument ================= */
 svg path{ stroke:var(--soft-color); }
-svg line{
-    stroke:var(--main-color);
-    filter:drop-shadow(0 0 6px var(--dim-color));
-}
+svg line{ stroke:var(--main-color); }
 svg circle{ fill:var(--main-color); }
 
-.scale text{
-    fill:var(--dim-color);
-    font-size:14px;
-}
-
-/* ================= Debug ================= */
 .box.debug{
     color:var(--dim-color);
-    border-color:var(--soft-color);
-    font-size:24px;
+    font-size:22px;
 }
 
 .debuggrid{
     display:grid;
     grid-template-columns:
         max-content max-content 100px max-content max-content;
-    row-gap:12px;
+    row-gap:10px;
     column-gap:8px;
     justify-content:start;
     text-align:left;
@@ -277,21 +257,14 @@ svg circle{ fill:var(--main-color); }
 </style>
 
 <script>
-/* ================= TAG / NACHT ================= */
 function updateThemeByTime(){
     const h = new Date().getHours();
-    if(h >= 20 || h < 6){
-        document.body.setAttribute("data-theme","amber");
-    }else{
-        document.body.setAttribute("data-theme","green");
-    }
+    document.body.setAttribute("data-theme",(h>=20||h<6)?"amber":"green");
 }
 
-/* ================= Schwellen ================= */
 const OIL_WARN_BAR = 0.8;
 const TEMP_WARN_C = 120;
 
-/* ================= Zeiger ================= */
 function setNeedle(bar){
     if(bar===null) return;
     let a = -90 + (bar/5)*180;
@@ -299,7 +272,6 @@ function setNeedle(bar){
         .setAttribute("transform","rotate("+a+" 150 140)");
 }
 
-/* ================= Update ================= */
 async function update(){
     let j = await (await fetch("/data.json")).json();
 
@@ -310,7 +282,6 @@ async function update(){
 
     let oil=document.getElementById("oil_bar");
     oil.classList.remove("warn","blink");
-
     if(j.oil_bar!==null && j.oil_bar < OIL_WARN_BAR){
         oil.classList.add("warn","blink");
     }
@@ -324,12 +295,11 @@ async function update(){
     setNeedle(j.oil_bar);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
     updateThemeByTime();
-    setInterval(updateThemeByTime, 300000);
-    setInterval(update, 1000);
+    setInterval(updateThemeByTime,300000);
+    setInterval(update,1000);
 });
-
 </script>
 </head>
 
@@ -340,19 +310,31 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- ================= ÖLDRUCK ================= -->
 <div class="box flex">
 <svg width="340" height="200" viewBox="0 0 300 170">
-    <path d="M40 140 A110 110 0 0 1 260 140"
-          fill="none" stroke-width="10"/>
 
-    <g class="scale">
-        <text x="40"  y="150">0</text>
-        <text x="80"  y="80">1</text>
-        <text x="130" y="50">2</text>
-        <text x="170" y="50">3</text>
-        <text x="220" y="80">4</text>
-        <text x="255" y="150">5</text>
+    <path d="M40 140 A110 110 0 0 1 260 140"
+          fill="none"
+          stroke-width="10"/>
+
+    <!-- Teilstriche -->
+    <g transform="translate(150 140)">
+        <g transform="rotate(-90)"><line x1="0" y1="-110" x2="0" y2="-100" stroke-width="2"/></g>
+        <g transform="rotate(-72)"><line x1="0" y1="-110" x2="0" y2="-104" stroke-width="2"/></g>
+        <g transform="rotate(-54)"><line x1="0" y1="-110" x2="0" y2="-100" stroke-width="2"/></g>
+        <g transform="rotate(-36)"><line x1="0" y1="-110" x2="0" y2="-104" stroke-width="2"/></g>
+        <g transform="rotate(-18)"><line x1="0" y1="-110" x2="0" y2="-100" stroke-width="2"/></g>
+        <g transform="rotate(0)"><line x1="0" y1="-110" x2="0" y2="-104" stroke-width="2"/></g>
+        <g transform="rotate(18)"><line x1="0" y1="-110" x2="0" y2="-100" stroke-width="2"/></g>
+        <g transform="rotate(36)"><line x1="0" y1="-110" x2="0" y2="-104" stroke-width="2"/></g>
+        <g transform="rotate(54)"><line x1="0" y1="-110" x2="0" y2="-100" stroke-width="2"/></g>
+        <g transform="rotate(72)"><line x1="0" y1="-110" x2="0" y2="-104" stroke-width="2"/></g>
+        <g transform="rotate(90)"><line x1="0" y1="-110" x2="0" y2="-100" stroke-width="2"/></g>
     </g>
 
-    <line id="needle" x1="150" y1="140" x2="150" y2="45" stroke-width="5"/>
+    <line id="needle"
+          x1="150" y1="140"
+          x2="150" y2="45"
+          stroke-width="5"/>
+
     <circle cx="150" cy="140" r="7"/>
 </svg>
 
@@ -398,6 +380,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 </html>
 )====";
+
+
 
 
 
